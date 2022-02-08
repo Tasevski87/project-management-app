@@ -1,3 +1,2 @@
-const router = require('express').Router();
+//create user-routes
 
-module.exports = router;
