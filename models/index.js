@@ -1,6 +1,7 @@
 // Import models
 const Project = require('./Project');
 const Service = require('./Service');
+const User = require('./User');
 
 // const User = require('./User');
 
@@ -20,4 +21,4 @@ Project.hasMany(Service, {
 
 
 
-module.exports = { Project, Service};
+module.exports = { Project, Service, User};
