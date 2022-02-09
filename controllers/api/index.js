@@ -5,6 +5,6 @@ const serviceRoutes = require('./service-routes');
 
 router.use('/users', userRoutes);
 router.use('/project', projectRoutes);
-router.use('/services', serviceRoutes);
+router.use('/service', serviceRoutes);
 
 module.exports = router;
