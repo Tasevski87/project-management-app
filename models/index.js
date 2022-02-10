@@ -1,7 +1,6 @@
 // Import models
 const Project = require('./Project');
 const Service = require('./Service');
-const User = require('./User');
 
 // const User = require('./User');
 
