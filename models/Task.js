@@ -6,10 +6,10 @@ const sequelize = require('../config/connection.js')
 
 
 // Initialize model (table) by extending off Sequelize's Model class
-class Service extends Model { }
+class Task extends Model { }
 
 // set up fields and rules for model
-Service.init(
+Task.init(
     {
         id: {
             type: DataTypes.INTEGER,
@@ -19,12 +19,17 @@ Service.init(
         },
 
 
-        service_name: {
+        task_name: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+
+        task_description: {
             type: DataTypes.STRING,
             allowNull: false
         },
         
-        service_id: {
+        task_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
         }
@@ -35,8 +40,8 @@ Service.init(
         sequelize,
         freezeTableName: true,
         underscored: true,
-        modelName: 'service'
+        modelName: 'task'
     }
 );
 
-module.exports = Service;
+module.exports = Task;

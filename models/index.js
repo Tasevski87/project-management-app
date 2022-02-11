@@ -1,18 +1,17 @@
 // Import models
 const Project = require('./Project');
-const Service = require('./Service');
-
-// const User = require('./User');
-
+const Task = require('./Task');
+const User = require('./User');
+const Comment = require('./Comment');
 
 
 //create relationships
-Service.belongsTo(Project, {
-    foreignKey: 'service_id',
+Task.belongsTo(Project, {
+    foreignKey: 'task_id',
 })
 
-Project.hasMany(Service, {
-    foreignKey: 'service_id',
+Project.hasMany(Task, {
+    foreignKey: 'task_id',
 })
 
 Project.hasMany(Comment, {
@@ -24,8 +23,8 @@ Comment.belongsTo(Project, {
     foreignKey: 'project_id',
     onDelete: 'SET NULL'
 })
-Comment.belongsTo(Service, {
-    foreignKey: 'service_id',
+Comment.belongsTo(Task, {
+    foreignKey: 'task_id',
     onDelete: 'SET NULL'
 })
 
@@ -44,4 +43,4 @@ Comment.belongsTo(Service, {
 
 
 
-module.exports = { Project, Service, Comment};
+module.exports = { Project, Task, Comment};
