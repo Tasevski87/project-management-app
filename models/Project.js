@@ -1,42 +1,38 @@
-// import important parts of sequelize library
-const { Model, DataTypes } = require('sequelize');
+const { Model, DataTypes } = require("sequelize");
+const sequelize = require("../config/connection.js");
 
-// import our database connection
-const sequelize = require('../config/connection.js')
+class Project extends Model {}
 
-
-// Initialize model (table) by extending off Sequelize's Model class
-class Project extends Model { }
-
-
-// set up fields and rules for model
 Project.init(
   {
-    // define columns
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
-      autoIncrement: true
+      autoIncrement: true,
     },
     project_name: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
-
-    project_id : {
+    content: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    user_id: {
       type: DataTypes.INTEGER,
-      allowNull: false
-    }
+      references: {
+        model: "user",
+        key: "id",
+      },
+    },
   },
-
   {
     sequelize,
     freezeTableName: true,
     underscored: true,
-    modelName: 'project'
+    modelName: "project",
   }
 );
 
-
-module.exports = Project; 
+module.exports = Project;

@@ -1,47 +1,45 @@
-// import important parts of sequelize library
-const { Model, DataTypes } = require('sequelize');
+const { Model, DataTypes } = require("sequelize");
+const sequelize = require("../config/connection.js");
 
-// import our database connection
-const sequelize = require('../config/connection.js')
+class Task extends Model {}
 
-
-// Initialize model (table) by extending off Sequelize's Model class
-class Task extends Model { }
-
-// set up fields and rules for model
 Task.init(
-    {
-        id: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            primaryKey: true,
-            autoIncrement: true
-        },
-
-
-        task_name: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-
-        task_description: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        
-        task_id: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-        }
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
     },
-
-    
-    {
-        sequelize,
-        freezeTableName: true,
-        underscored: true,
-        modelName: 'task'
-    }
+    task_name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    task_description: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    user_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: "user",
+        key: "id",
+      },
+    },
+    project_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: "project",
+        key: "id",
+      },
+    },
+  },
+  {
+    sequelize,
+    freezeTableName: true,
+    underscored: true,
+    modelName: "task",
+  }
 );
 
 module.exports = Task;

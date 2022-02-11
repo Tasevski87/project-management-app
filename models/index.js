@@ -1,46 +1,54 @@
-// Import models
-const Project = require('./Project');
-const Task = require('./Task');
-const User = require('./User');
-const Comment = require('./Comment');
-
+const Project = require("./Project");
+const Task = require("./Task");
+const User = require("./User");
+const Comment = require("./Comment");
 
 //create relationships
-Task.belongsTo(Project, {
-    foreignKey: 'task_id',
-})
+User.hasMany(Project, {
+  foreignKey: "user_id",
+});
 
-Project.hasMany(Task, {
-    foreignKey: 'task_id',
-})
+Project.belongsTo(User, {
+  foreignKey: "user_id",
+  onDelete: "SET NULL",
+});
 
-Project.hasMany(Comment, {
-    foreignKey:''
-})
-
+Comment.belongsTo(User, {
+  foreignKey: "user_id",
+  onDelete: "SET NULL",
+});
 
 Comment.belongsTo(Project, {
-    foreignKey: 'project_id',
-    onDelete: 'SET NULL'
-})
-Comment.belongsTo(Task, {
-    foreignKey: 'task_id',
-    onDelete: 'SET NULL'
-})
+  foreignKey: "project_id",
+  onDelete: "SET NULL",
+});
 
+User.hasMany(Comment, {
+  foreignKey: "user_id",
+  onDelete: "SET NULL",
+});
 
-// Comment.belongsTo(User, {
-//     foreignKey: 'user_id',
-//     onDelete: 'SET NULL'
-// });
+Project.hasMany(Comment, {
+  foreignKey: "project_id",
+});
 
-// User.hasMany(Comment, {
-//     foreignKey: 'user_id',
-//     onDelete: 'SET NULL'
+Task.belongsTo(User, {
+  foreignKey: "user_id",
+  onDelete: "SET NULL",
+});
 
-// });
+Task.belongsTo(Project, {
+  foreignKey: "project_id",
+  onDelete: "SET NULL",
+});
 
+User.hasMany(Task, {
+  foreignKey: "user_id",
+  onDelete: "SET NULL",
+});
 
+Project.hasMany(Task, {
+  foreignKey: "project_id",
+});
 
-
-module.exports = { Project, Task, Comment};
+module.exports = { Project, Task, Comment, User };

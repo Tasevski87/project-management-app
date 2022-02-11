@@ -1,62 +1,100 @@
-const router = require('express').Router();
-const { Project, Task, User } = require('../../models')
+const router = require("express").Router();
+const { Project, Task, User } = require("../../models");
 
-router.get('/', (req, res) => {
-    Task.findAll({
-        include: [Project]
-    }).then(dbTaskData => {
-        if (!dbTaskData) {
-            res.status(404).json({ message: 'No task found' });
-            return;
-        }
-        res.json(dbTaskData);
+// GET api/task
+router.get("/", (req, res) => {
+  Task.findAll({
+    include: [Project],
+  })
+    .then((dbTaskData) => {
+      if (!dbTaskData) {
+        res.status(404).json({ message: "No tasks found" });
+        return;
+      }
+      res.json(dbTaskData);
     })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json(err)
-        });
-});
-// find one project by its `id` value
-router.get('/:id', (req, res) => {
-    Task.findOne({
-        where: {
-            id: req.params.id
-        },
-
-
-        include: [Project]
-
-
-    }).then(task => res.json(task))
-        .catch(err => res.status(500).json(err))
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
-
-router.post('/', (req, res) => {
-    Task.create(req.body)
-        .then(task => res.json(task))
-        .catch(err => res.status(500).json(err))
+// GET api/task/1
+router.get("/:id", (req, res) => {
+  Task.findOne({
+    attributes: { exclude: ["password"] },
+    where: {
+      id: req.params.id,
+    },
+    include: [Project],
+  })
+    .then((dbTaskData) => {
+      if (!dbTaskData) {
+        res.status(404).json({ message: "No task found with this id" });
+        return;
+      }
+      res.json(dbTaskData);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
-router.put('/:id', (req, res) => {
-
-    Task.update()
-
-
+// POST /api/users
+router.post("/", (req, res) => {
+  Task.create({
+    task_name: req.body.task_name,
+    task_description: req.body.task_description,
+    user_id: req.body.user_id, // CHANGE TO SESSION
+    project_id: req.body.project_id,
+  })
+    .then((dbTaskData) => res.json(dbTaskData))
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
-router.delete('/:id', (req, res) => {
-
-    Task.destroy({
-        where: {
-
-        }
-    }).then(task => res.json(task))
-        .catch(err => res.status(500).json(err))
+// PUT api/task/1
+router.put("/:id", (req, res) => {
+  Task.update(req.body, {
+    individualHooks: true,
+    where: {
+      id: req.params.id,
+    },
+  })
+    .then((dbTaskData) => {
+      if (!dbTaskData[0]) {
+        res.status(404).json({ message: "No task found with this id" });
+        return;
+      }
+      res.json(dbTaskData);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
-
+// DELETE api/task/1
+router.delete("/:id", (req, res) => {
+  Task.destroy({
+    where: {
+      id: req.params.id,
+    },
+  })
+    .then((dbTaskData) => {
+      if (!dbTaskData) {
+        res.status(404).json({ message: "No task found with this id" });
+        return;
+      }
+      res.json(dbTaskData);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
 
 module.exports = router;
-
-

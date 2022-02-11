@@ -1,83 +1,91 @@
-const router = require('express').Router();
-const { Project, Service } = require('../../models')
+const router = require("express").Router();
+const { Project, Task } = require("../../models");
 
-router.get('/', (req, res) => {
-    Project.findAll({
-        include: [Service]
-
-
-    }).then(dbProjectData => res.json(dbProjectData))
-        .catch(err => {
-            console.log(err);
-            res.status(500).json(err);
-        });
+// GET api/project
+router.get("/", (req, res) => {
+  Project.findAll({
+    include: [Task],
+  })
+    .then((dbProjectData) => res.json(dbProjectData))
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
-// find one project by its `id` value
-router.get('/:id', (req, res) => {
-    Project.findOne({
-        where: {
-            id: req.params.id
-        },
-
-        include: [Service]
-
-    }).then(dbProjectData => {
-        if (!dbProjectData) {
-            res.status(404).json({ message: 'No user found with this id' });
-            return;
-        }
-        res.json(dbProjectData);
+// GET api/project/1
+router.get("/:id", (req, res) => {
+  Project.findOne({
+    where: {
+      id: req.params.id,
+    },
+    include: [Task],
+  })
+    .then((dbProjectData) => {
+      if (!dbProjectData) {
+        res.status(404).json({ message: "No project found with this id" });
+        return;
+      }
+      res.json(dbProjectData);
     })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json(err);
-        });
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
-
-router.post('/', (req, res) => {
-    Project.create(req.body)
-        .then(dbProjectData => res.json(dbProjectData))
-        .catch(err => res.status(500).json(err))
+// POST api/project
+router.post("/", (req, res) => {
+  Project.create({
+    project_name: req.body.project_name,
+    content: req.body.content,
+    user_id: req.body.user_id, // CHANGE FROM BODY TO SESSION 
+  })
+    .then((dbProjectData) => res.json(dbProjectData))
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
-router.put('/:id', (req, res) => {
-    Project.update(req.body, {
-        where: {
-            id: req.params.id
-        }
+// PUT api/project/1
+router.put("/:id", (req, res) => {
+  Project.update(req.body, {
+    where: {
+      id: req.params.id,
+    },
+  })
+    .then((dbProjectData) => {
+      if (!dbProjectData[0]) {
+        res.status(404).json({ message: "No project found with this id" });
+        return;
+      }
+      res.json(dbProjectData);
     })
-        .then(dbProjectData => {
-            if (!dbProjectData[0]) {
-                res.status(404).json({ message: 'No user found with this id' });
-                return;
-            }
-            res.json(dbProjectData);
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json(err)
-        });
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
-router.delete('/:id', (req, res) => {
-    Project.destroy({
-        where: {
-            id: req.params.id
-        }
+// DELETE api/project/1
+router.delete("/:id", (req, res) => {
+  Project.destroy({
+    where: {
+      id: req.params.id,
+    },
+  })
+    .then((dbProjectData) => {
+      if (!dbProjectData) {
+        res.status(404).json({ message: "No project found with this id" });
+        return;
+      }
+      res.json(dbProjectData);
     })
-        .then(dbProjectData => {
-            if (!dbProjectData) {
-                res.status(404).json({ message: 'No user found with this id' });
-                return;
-            }
-            res.json(dbProjectData);
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json(err);
-        });
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
 module.exports = router;
