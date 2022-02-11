@@ -6,8 +6,11 @@ router.get('/', (req, res) => {
         include: [Service]
 
 
-    }).then(item => res.json(item))
-        .catch(err => res.status(500).json(err))
+    }).then(dbProjectData => res.json(dbProjectData))
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
 });
 
 // find one project by its `id` value
@@ -18,15 +21,24 @@ router.get('/:id', (req, res) => {
         },
 
         include: [Service]
-        
-    }).then(item => res.json(item))
-        .catch(err => res.status(500).json(err))
+
+    }).then(dbProjectData => {
+        if (!dbProjectData) {
+            res.status(404).json({ message: 'No user found with this id' });
+            return;
+        }
+        res.json(dbProjectData);
+    })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
 });
 
 
 router.post('/', (req, res) => {
     Project.create(req.body)
-        .then(item => res.json(item))
+        .then(dbProjectData => res.json(dbProjectData))
         .catch(err => res.status(500).json(err))
 });
 
@@ -35,9 +47,18 @@ router.put('/:id', (req, res) => {
         where: {
             id: req.params.id
         }
-    })  .then(item => res.json(item))
-        .catch(err => res.status(500).json(err))
-
+    })
+        .then(dbProjectData => {
+            if (!dbProjectData[0]) {
+                res.status(404).json({ message: 'No user found with this id' });
+                return;
+            }
+            res.json(dbProjectData);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err)
+        });
 });
 
 router.delete('/:id', (req, res) => {
@@ -45,10 +66,18 @@ router.delete('/:id', (req, res) => {
         where: {
             id: req.params.id
         }
-    })  .then(item => res.json(item))
-        .catch(err => res.status(500).json(err))
+    })
+        .then(dbProjectData => {
+            if (!dbProjectData) {
+                res.status(404).json({ message: 'No user found with this id' });
+                return;
+            }
+            res.json(dbProjectData);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
 });
-
-
 
 module.exports = router;
