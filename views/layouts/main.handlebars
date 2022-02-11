@@ -1,0 +1,94 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
+    <script
+      src="https://kit.fontawesome.com/3a4289a5d2.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <title>Dashboard</title>
+  </head>
+  <body>
+    <!--  -->
+    <section class="hero is-info is-small">
+      <!-- Hero head: will stick at the top -->
+      <div class="hero-head">
+        <nav class="navbar">
+          <div class="container">
+            <div class="navbar-brand">
+              <a class="navbar-item">
+                <img src="./images/logo.PNG" alt="Logo" />
+              </a>
+              <span class="navbar-burger" data-target="navbarMenuHeroA">
+                <span></span>
+                <span></span>
+                <span></span>
+              </span>
+            </div>
+            <div id="navbarMenuHeroA" class="navbar-menu">
+              <div class="navbar-end">
+                <div class="field pt-2">
+                  <div class="control has-icons-left has-icons-right">
+                    <input
+                      class="input is-medium"
+                      type="email"
+                      placeholder="Search"
+                    />
+                    <span class="icon is-small is-left">
+                      <i class="fas fa-search fa-xs"></i>
+                    </span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+
+      <!-- Hero content: will be in the middle -->
+      <div class="hero-body">
+        <div class="container has-text-centered">
+          <p class="title">Project Manager</p>
+        </div>
+      </div>
+
+      <!-- Hero footer: will stick at the bottom -->
+      <div class="hero-foot">
+        <nav class="tabs is-boxed is-fullwidth">
+          <div class="container">
+            <ul>
+              <li>
+                <a href="/">Home</a>
+              </li>
+              <li><a>All Projects</a></li>
+              <li>
+                <a href="/dashboard">Dashboard</a>
+              </li>
+              <li>
+                {{#if loggedIn}}
+                  <a id="logout">Logout</a>
+                {{else}}
+                  <a href="/login">Login</a>
+                {{/if}}
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </section>
+    <!--  -->
+    <main class="container mt-4">
+      {{{body}}}
+    </main>
+  </body>
+</html>
+
+<script src="/javascript/login.js"></script>
+<script src="/javascript/logout.js"></script>
