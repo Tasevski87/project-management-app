@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
         'project_name',
         'content',
         'user_id',
-        [sequelize.literal('(SELECT * FROM task WHERE project.id = task.project_id)')]
+        [sequelize.literal('(SELECT (*) FROM task WHERE project.id = task.project_id)')]
       ],
       include: [
         {
