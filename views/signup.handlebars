@@ -1,0 +1,109 @@
+<div class="card">
+  <div class="card-image">
+
+  </div>
+  <div class="card-content">
+    <form id="signup-form" class="content">
+      <div class="field">
+        <label class="label">Name</label>
+        <div class="control">
+          <input required
+            id="input-name"
+            class="input"
+            type="text"
+            placeholder="Enter your name"
+          />
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Username</label>
+        <div class="control has-icons-left has-icons-right">
+          <input required
+            id="input-username"
+            class="input is-info"
+            type="text"
+            placeholder="Create a username"
+          />
+          <span class="icon is-small is-left">
+            <i class="fas fa-user"></i>
+          </span>
+          <span class="icon is-small is-right">
+            <i class="fas fa-check"></i>
+          </span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Email</label>
+        <div class="control has-icons-left has-icons-right">
+          <input required
+            id="input-email"
+            class="input is-info"
+            type="email"
+            placeholder="Enter your email address"
+          />
+          <span class="icon is-small is-left">
+            <i class="fas fa-envelope"></i>
+          </span>
+          <span class="icon is-small is-right">
+            <i class="fas fa-exclamation-triangle"></i>
+          </span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Password</label>
+        <div class="control has-icons-left has-icons-right">
+          <input required
+            id="input-password"
+            class="input is-info"
+            type="password"
+            placeholder="Enter a password"
+          />
+          <span class="icon is-small is-left">
+            <i class="fas fa-lock"></i>
+          </span>
+          <span class="icon is-small is-right">
+            <i class="fas fa-exclamation-triangle"></i>
+          </span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Title</label>
+        <div class="control">
+          <div class="select">
+            <select>
+              <option>Developer</option>
+              <option>Contributor</option>
+              <option>Analyst</option>
+              <option>Teacher</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">About</label>
+        <div class="control">
+          <textarea
+            id="input-about"
+            class="textarea"
+            placeholder="Tell us about yourself"
+          ></textarea>
+        </div>
+      </div>
+      <div class="field is-grouped">
+        <div class="control">
+          <button class="button is-info">Submit</button>
+        </div>
+        <div class="control">
+          <a href="/login" id="signup" class="button is-info is-light ml-3">Cancel</a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="/javascript/signup.js"></script>

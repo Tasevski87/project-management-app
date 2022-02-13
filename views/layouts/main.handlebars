@@ -12,7 +12,7 @@
       crossorigin="anonymous"
     ></script>
     <link rel="stylesheet" href="/stylesheets/style.css" />
-    <title>Dashboard</title>
+    <title>Project Manager</title>
   </head>
   <body>
     <!--  -->
@@ -23,7 +23,7 @@
           <div class="container">
             <div class="navbar-brand">
               <a class="navbar-item">
-                <img src="./images/logo.PNG" alt="Logo" />
+                <img src="/images/logo.PNG" alt="Logo" />
               </a>
               <span class="navbar-burger" data-target="navbarMenuHeroA">
                 <span></span>
@@ -69,7 +69,11 @@
               </li>
               <li><a>All Projects</a></li>
               <li>
-                <a href="/dashboard">Dashboard</a>
+                {{#if loggedIn}}
+                  <a href="/dashboard">Dashboard</a>
+                {{else}}
+                  <a href="/login">Dashboard</a>
+                {{/if}}
               </li>
               <li>
                 {{#if loggedIn}}
@@ -90,5 +94,6 @@
   </body>
 </html>
 
-<script src="/javascript/login.js"></script>
-<script src="/javascript/logout.js"></script>
+{{#if loggedIn}}
+  <script src="/javascript/logout.js"></script>
+{{/if}}

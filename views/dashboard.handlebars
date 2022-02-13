@@ -1,4 +1,12 @@
 <div class="columns is-multiline is-align-items-end is-justify-content-right">
-  {{> user-info}}
-  {{> projects-user}}
+  {{> user-info dashboard.[1] }}
+  <div class="column">
+    {{#if dashboard.length}}
+      {{#each dashboard as |project|}}
+
+        {{> project-info project }}
+  
+      {{/each}}
+    {{/if}}
+    </div>
 </div>

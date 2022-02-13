@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="columns is-centered">
+    <div class="column">
+      <div class="card">
+        <div class="card-content">
+          <article class="media">
+            <figure class="media-left">
+              <p class="image is-64x64">
+                <img src="/images/def-avatar.png" />
+              </p>
+            </figure>
+            <div class="media-content">
+              <div class="content">
+                <p>
+                  <strong class="is-title">Title:
+                    {{project_name}}
+                  </strong><small> · {{created_at}}</small>
+                  <br />
+                  <strong>Description:</strong>
+                  {{content}}
+                  <br />
+                  <strong>Author:</strong>
+                  {{user.username}}
+                  <br />
+                  {{! <strong>Status: In Progress</strong>
+                  <br /> }}
+                  <a class="view-project" href="/project/{{id}}"><strong>View
+                      Project</strong></a>
+                  <br />
+                  <small><a>Comment</a></small>
+                </p>
+              </div>
+              {{! comments }}
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

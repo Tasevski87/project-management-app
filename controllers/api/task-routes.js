@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const withAuth = require("../../utils/auth");
 const { Project, Task, User } = require("../../models");
 
 // GET api/task
@@ -42,7 +43,7 @@ router.get("/:id", (req, res) => {
 });
 
 // POST /api/users
-router.post("/", (req, res) => {
+router.post("/", withAuth, (req, res) => {
   Task.create({
     task_name: req.body.task_name,
     task_description: req.body.task_description,
@@ -57,7 +58,7 @@ router.post("/", (req, res) => {
 });
 
 // PUT api/task/1
-router.put("/:id", (req, res) => {
+router.put("/:id", withAuth, (req, res) => {
   Task.update(req.body, {
     individualHooks: true,
     where: {
@@ -78,7 +79,7 @@ router.put("/:id", (req, res) => {
 });
 
 // DELETE api/task/1
-router.delete("/:id", (req, res) => {
+router.delete("/:id", withAuth, (req, res) => {
   Task.destroy({
     where: {
       id: req.params.id,

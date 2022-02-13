@@ -39,11 +39,15 @@
           <button id="login" class="button is-info">
             Login
           </button>
+          <a href="/signup" id="signup" class="button is-info ml-3">Signup</a>
         </p>
       </div>
     </form>
   </div>
 </div>
 
-<script src="/javascript/login.js"></script>
-<script src="/javascript/logout.js"></script>
+{{#if loggedIn}}
+  <script src="/javascript/logout.js"></script>
+{{else}}
+  <script src="/javascript/login.js"></script>
+{{/if}}

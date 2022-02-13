@@ -1,5 +1,7 @@
 const router = require("express").Router();
+const withAuth = require("../../utils/auth");
 const { Project, Task } = require("../../models");
+
 
 // GET api/project
 router.get("/", (req, res) => {
@@ -35,7 +37,7 @@ router.get("/:id", (req, res) => {
 });
 
 // POST api/project
-router.post("/", (req, res) => {
+router.post("/", withAuth, (req, res) => {
   Project.create({
     project_name: req.body.project_name,
     content: req.body.content,
@@ -49,7 +51,7 @@ router.post("/", (req, res) => {
 });
 
 // PUT api/project/1
-router.put("/:id", (req, res) => {
+router.put("/:id", withAuth, (req, res) => {
   Project.update(req.body, {
     where: {
       id: req.params.id,
@@ -69,7 +71,7 @@ router.put("/:id", (req, res) => {
 });
 
 // DELETE api/project/1
-router.delete("/:id", (req, res) => {
+router.delete("/:id", withAuth, (req, res) => {
   Project.destroy({
     where: {
       id: req.params.id,
@@ -89,3 +91,4 @@ router.delete("/:id", (req, res) => {
 });
 
 module.exports = router;
+

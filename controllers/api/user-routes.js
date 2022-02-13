@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const withAuth = require("../../utils/auth");
 const { User, Project } = require("../../models");
 
 // GET /api/users
@@ -37,6 +38,8 @@ router.get("/:id", (req, res) => {
 // POST /api/users
 router.post("/", (req, res) => {
   User.create({
+    name: req.body.name,
+    about: req.body.about,
     username: req.body.username,
     email: req.body.email,
     password: req.body.password,
@@ -49,7 +52,7 @@ router.post("/", (req, res) => {
 });
 
 // PUT /api/users/1
-router.put("/:id", (req, res) => {
+router.put("/:id", withAuth, (req, res) => {
   User.update(req.body, {
     individualHooks: true,
     where: {
@@ -92,7 +95,6 @@ router.delete("/:id", (req, res) => {
 // POST /api/users/login
 router.post("/login", (req, res) => {
   console.log("login button clicked")
-  console.log()
   User.findOne({
     where: {
       username: req.body.username,
