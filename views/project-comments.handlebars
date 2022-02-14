@@ -26,7 +26,11 @@
                   <br /> }}
                   {{#if loggedIn}}{{else}}
                     <a class="view-project" href="/login"><strong
-                      >Comment</strong></a>
+                      >Comment</strong></a>  ·  
+                  {{/if}}
+                  {{#if loggedIn}}{{else}}
+                    <a class="view-project" href="/login"><strong
+                      >Add Task</strong></a>
                   {{/if}}
                 </p>
               </div>

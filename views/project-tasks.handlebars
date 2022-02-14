@@ -13,27 +13,33 @@
               <div class="content">
                 <p>
                   <strong class="is-title">Title:
-                    {{project_name}}
-                  </strong><small> · {{created_at}}</small>
+                    {{project.project_name}}  </strong><small>  ·
+                    {{project.created_at}}</small>
                   <br />
                   <strong>Description:</strong>
-                  {{content}}
+                  {{project.content}}
                   <br />
                   <strong>Author:</strong>
-                  {{user.username}}
+                  {{project.user.username}}
                   <br />
                   {{! <strong>Status: In Progress</strong>
                   <br /> }}
-                  <a class="view-comment" href="/project/{{id}}/comments"><strong>View
-                      Comments · </strong></a>
-                  <a class="view-task" href="/project/{{id}}/tasks"><strong>View
-                      Tasks</strong></a>
-                  <br />
+                  {{#if loggedIn}}{{else}}
+                    <a class="view-project" href="/login"><strong
+                      >Comment</strong></a>  ·  
+                  {{/if}}
+                  {{#if loggedIn}}{{else}}
+                    <a class="view-project" href="/login"><strong
+                      >Add Task</strong></a>
+                  {{/if}}
                 </p>
               </div>
-              {{! comments }}
+              {{> tasks project.tasks }}
             </div>
           </article>
+          {{#if loggedIn}}
+            {{> task-box }}
+          {{/if}}
         </div>
       </div>
     </div>

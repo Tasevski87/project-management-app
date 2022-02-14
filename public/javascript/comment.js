@@ -1,11 +1,14 @@
-// Send user inputed data to server endpoint api/comments POST
+// Send user inputed data to server endpoint api/comment POST
 async function commentFormHandler(event) {
   event.preventDefault();
 
   const comment_text = document.getElementById("comment").value.trim();
+
   const project_id = window.location.toString().split("/")[
-    window.location.toString().split("/").length - 1
+    window.location.toString().split("/").length - 2
   ];
+
+  console.log(project_id)
 
   if (comment_text) {
     const response = await fetch("/api/comment", {

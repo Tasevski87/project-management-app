@@ -1,3 +1,4 @@
+// Send user inputed data to server endpoint api/users/login POST
 async function login(event) {
   event.preventDefault();
 

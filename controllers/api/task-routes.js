@@ -47,8 +47,8 @@ router.post("/", withAuth, (req, res) => {
   Task.create({
     task_name: req.body.task_name,
     task_description: req.body.task_description,
-    user_id: req.body.user_id, // CHANGE TO SESSION
     project_id: req.body.project_id,
+    user_id: req.session.user_id, 
   })
     .then((dbTaskData) => res.json(dbTaskData))
     .catch((err) => {

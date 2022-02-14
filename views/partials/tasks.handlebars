@@ -1,0 +1,22 @@
+{{#each this}}
+  <article class="media">
+    <figure class="media-left">
+      <p class="image is-48x48">
+        <img src="/images/def-avatar.png" />
+      </p>
+    </figure>
+    <div class="media-content">
+      <div class="content">
+        <div class="cardhearder"><strong>Task Name: </strong>
+          {{task_name}}
+          <p>
+            <strong>Task Description: </strong>{{task_description}}
+            <br />
+            By {{user.username}}<small> · {{created_at}} </small>
+            <br/>
+          </p>
+        </div>
+      </div>
+    </div>
+  </article>
+{{/each}}
