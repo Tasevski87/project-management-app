@@ -19,7 +19,7 @@ router.get("/", withAuth,  (req, res) => {
     .then((dashboardData) => {
       const dashboard = dashboardData.map((project) => project.get({ plain: true }));
       // render dashboard view, send project data and loggedIn
-      res.render("dashboard", {
+      res.render("dash-main", {
         dashboard,
         loggedIn: req.session.loggedIn,
       });
@@ -29,5 +29,11 @@ router.get("/", withAuth,  (req, res) => {
       res.status(500).json(err);
     });
 });
+
+// create project
+router.get("/create", withAuth, (req, res) => {
+  res.render("dash-create");
+});
+
 
 module.exports = router;

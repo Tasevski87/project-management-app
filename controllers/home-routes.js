@@ -7,13 +7,21 @@ router.get("/", (req, res) => {
     attributes: ["id", "project_name", "content", "created_at"],
     include: [
       {
+        model: Comment
+      },
+      {
+        model: Task
+      },
+      {
         model: User,
         attributes: ["username"],
       },
     ],
   })
     .then((dbProjectData) => {
-      const projects = dbProjectData.map((project) => project.get({ plain: true }));
+      const projects = dbProjectData.map((project) =>
+        project.get({ plain: true })
+      );
       res.render("homepage", {
         projects,
         loggedIn: req.session.loggedIn,
@@ -25,6 +33,7 @@ router.get("/", (req, res) => {
     });
 });
 
+// get a single project for view
 router.get("/project/:id", (req, res) => {
   Project.findOne({
     where: {
@@ -34,7 +43,13 @@ router.get("/project/:id", (req, res) => {
     include: [
       {
         model: Comment,
-        attributes: ["id", "comment_text", "project_id", "user_id", "created_at"],
+        attributes: [
+          "id",
+          "comment_text",
+          "project_id",
+          "user_id",
+          "created_at",
+        ],
         include: {
           model: User,
           attributes: ["username"],
@@ -68,7 +83,7 @@ router.get("/project/:id", (req, res) => {
 // generate login page
 router.get("/login", (req, res) => {
   if (req.session.loggedIn) {
-    res.redirect("/dashboard");
+    res.redirect("/dash-main");
     return;
   }
 
@@ -78,12 +93,11 @@ router.get("/login", (req, res) => {
 // generate signup page
 router.get("/signup", (req, res) => {
   if (req.session.loggedIn) {
-    res.redirect("/dashboard");
+    res.redirect("/dash-main");
     return;
   }
 
   res.render("signup");
 });
-
 
 module.exports = router;

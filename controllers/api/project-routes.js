@@ -41,7 +41,7 @@ router.post("/", withAuth, (req, res) => {
   Project.create({
     project_name: req.body.project_name,
     content: req.body.content,
-    user_id: req.body.user_id, // CHANGE FROM BODY TO SESSION 
+    user_id: req.session.user_id, 
   })
     .then((dbProjectData) => res.json(dbProjectData))
     .catch((err) => {

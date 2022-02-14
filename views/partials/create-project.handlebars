@@ -1,0 +1,44 @@
+<div class="card">
+  <div class="card-image">
+
+  </div>
+  <div class="card-content">
+    <form id="create-form" class="content">
+      <div class="field">
+        <label class="label">Project Name</label>
+        <div class="control">
+          <input
+            required
+            id="proj-name"
+            class="input"
+            type="text"
+            placeholder="Enter a project name"
+          />
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Project Description</label>
+        <div class="control">
+          <textarea
+            required
+            id="proj-description"
+            class="textarea"
+            placeholder="What is the project"
+          ></textarea>
+        </div>
+      </div>
+      
+      <div class="field is-grouped">
+        <div class="control">
+          <button class="button is-info">Submit</button>
+        </div>
+        <div class="control">
+          <a href="/dash-main" class="button is-info is-light ml-3">Cancel</a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="/javascript/create-project.js"></script>
