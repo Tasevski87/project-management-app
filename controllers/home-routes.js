@@ -7,10 +7,10 @@ router.get("/", (req, res) => {
     attributes: ["id", "project_name", "content", "created_at"],
     include: [
       {
-        model: Comment
+        model: Comment,
       },
       {
-        model: Task
+        model: Task,
       },
       {
         model: User,
@@ -82,18 +82,13 @@ router.get("/project/:id", (req, res) => {
 
 // generate login page
 router.get("/login", (req, res) => {
-  if (req.session.loggedIn) {
-    res.redirect("/dash-main");
-    return;
-  }
-
   res.render("login");
 });
 
 // generate signup page
 router.get("/signup", (req, res) => {
   if (req.session.loggedIn) {
-    res.redirect("/dash-main");
+    res.redirect("/dashboard");
     return;
   }
 
