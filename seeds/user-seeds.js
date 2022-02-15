@@ -8,6 +8,7 @@ const userData = [
     username: "alesmonde0",
     email: "nwestnedge0@cbc.ca",
     password: "password123",
+    avatar: "https://bootdey.com/img/Content/avatar/avatar8.png"
   },
   {
     name: "Ralph P",
@@ -15,6 +16,7 @@ const userData = [
     username: "jwilloughway1",
     email: "rmebes1@sogou.com",
     password: "password123",
+    avatar: "https://bootdey.com/img/Content/avatar/avatar7.png"
   },
   {
     name: "Sally F",
@@ -22,6 +24,7 @@ const userData = [
     username: "iboddam2",
     email: "cstoneman2@last.fm",
     password: "password123",
+    avatar: "https://bootdey.com/img/Content/avatar/avatar6.png"
   },
   {
     name: "John M",
@@ -29,6 +32,7 @@ const userData = [
     username: "dstanmer3",
     email: "ihellier3@goo.ne.jp",
     password: "password123",
+    avatar: "https://bootdey.com/img/Content/avatar/avatar5.png"
   },
   {
     name: "Charlie K",
@@ -36,6 +40,7 @@ const userData = [
     username: "djiri4",
     email: "gmidgley4@weather.com",
     password: "password123",
+    avatar: "https://bootdey.com/img/Content/avatar/avatar7.png"
   },
   {
     name: "Dennis M",
@@ -43,6 +48,7 @@ const userData = [
     username: "msprague5",
     email: "larnout5@imdb.com",
     password: "password123",
+    avatar: "https://bootdey.com/img/Content/avatar/avatar1.png"
   },
   {
     name: "Frank M",
@@ -50,6 +56,7 @@ const userData = [
     username: "mpergens6",
     email: "hnapleton6@feedburner.com",
     password: "password123",
+    avatar: "https://bootdey.com/img/Content/avatar/avatar2.png"
   },
   {
     name: "Nathan L",
@@ -57,6 +64,7 @@ const userData = [
     username: "tpenniell7",
     email: "kperigo7@china.com.cn",
     password: "password123",
+    avatar: "https://bootdey.com/img/Content/avatar/avatar3.png"
   },
   {
     name: "Sarah D",
@@ -64,6 +72,7 @@ const userData = [
     username: "msabbins8",
     email: "lmongain8@google.ru",
     password: "password123",
+    avatar: "https://bootdey.com/img/Content/avatar/avatar4.png"
   },
   {
     name: "Nancy P",
@@ -71,6 +80,7 @@ const userData = [
     username: "jmacarthur9",
     email: "bsteen9@epa.gov",
     password: "password123",
+    avatar: "https://bootdey.com/img/Content/avatar/avatar5.png"
   },
 ];
 

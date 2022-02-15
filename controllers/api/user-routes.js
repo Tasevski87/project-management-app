@@ -43,8 +43,17 @@ router.post("/", (req, res) => {
     username: req.body.username,
     email: req.body.email,
     password: req.body.password,
+    avatar: req.body.avatar,
   })
-    .then((dbUserData) => res.json(dbUserData))
+    .then((dbUserData) => {
+      req.session.save(() => {
+        req.session.user_id = dbUserData.id;
+        req.session.username = dbUserData.username;
+        req.session.loggedIn = true;
+
+        res.json(dbUserData);
+      });
+    })
     .catch((err) => {
       console.log(err);
       res.status(500).json(err);
@@ -94,7 +103,6 @@ router.delete("/:id", (req, res) => {
 
 // POST /api/users/login
 router.post("/login", (req, res) => {
-  console.log("login button clicked")
   User.findOne({
     where: {
       username: req.body.username,

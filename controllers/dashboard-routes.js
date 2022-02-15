@@ -20,11 +20,45 @@ router.get("/", withAuth, (req, res) => {
       const dashboard = dashboardData.map((project) =>
         project.get({ plain: true })
       );
+      console.log(dashboard);
       // render dashboard view, send project data and loggedIn
       res.render("dash-main", {
         dashboard,
         loggedIn: req.session.loggedIn,
       });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
+
+// GET /api/users/1
+router.get("/", (req, res) => {
+  User.findOne({
+    attributes: { exclude: ["password"] },
+    where: {
+      id: req.session.id,
+    },
+    include: [
+      {
+        model: Comment,
+        include: {
+          model: Project,
+          attributes: ["project_name"],
+        },
+      },
+      {
+        model: Project,
+      },
+    ],
+  })
+    .then((dbUserData) => {
+      if (!dbUserData) {
+        res.status(404).json({ message: "No user found with this id" });
+        return;
+      }
+      res.json(dbUserData);
     })
     .catch((err) => {
       console.log(err);
@@ -69,7 +103,13 @@ router.get("/tasks", withAuth, (req, res) => {
     where: {
       user_id: req.session.user_id,
     },
-    attributes: ["id", "task_name", "task_description", "user_id", "created_at"],
+    attributes: [
+      "id",
+      "task_name",
+      "task_description",
+      "user_id",
+      "created_at",
+    ],
     include: [
       {
         model: User,
@@ -78,12 +118,10 @@ router.get("/tasks", withAuth, (req, res) => {
     ],
   })
     .then((dashboardData) => {
-      console.log(dashboardData)
-      const dashboard = dashboardData.map((task) =>
-        task.get({ plain: true })
-      );
+      console.log(dashboardData);
+      const dashboard = dashboardData.map((task) => task.get({ plain: true }));
       // render dashboard view, send task data and loggedIn
-      console.log("tasks:",dashboard);
+      console.log("tasks:", dashboard);
       res.render("dash-tasks", {
         dashboard,
         loggedIn: req.session.loggedIn,

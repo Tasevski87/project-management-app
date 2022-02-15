@@ -14,7 +14,7 @@ router.get("/", (req, res) => {
       },
       {
         model: User,
-        attributes: ["username"],
+        attributes: { exclude: ["password"] },
       },
     ],
   })
@@ -52,7 +52,7 @@ router.get("/project/:id/comments", (req, res) => {
         ],
         include: {
           model: User,
-          attributes: ["username"],
+          attributes: { exclude: ["password"] },
         },
       },
       {
@@ -60,7 +60,7 @@ router.get("/project/:id/comments", (req, res) => {
       },
       {
         model: User,
-        attributes: ["username"],
+        attributes: { exclude: ["password"] },
       },
     ],
   })

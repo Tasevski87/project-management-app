@@ -1,3 +1,5 @@
+let avatar = "/images/def-avatar.png";
+
 // Send user inputed data to server endpoint for sign up verification api/users/ POST
 async function signupFormHandler(event) {
   event.preventDefault();
@@ -7,6 +9,7 @@ async function signupFormHandler(event) {
   const password = document.getElementById("input-password").value.trim();
   const email = document.getElementById("input-email").value.trim();
   const about = document.getElementById("input-about").value.trim();
+ 
 
   if (username && password) {
     const response = await fetch("/api/users", {
@@ -16,11 +19,12 @@ async function signupFormHandler(event) {
         username,
         email,
         password,
-        about
+        avatar,
+        about,
       }),
       headers: { "Content-Type": "application/json" },
     });
-
+    
     if (response.ok) {
       document.location.replace("/dashboard");
     } else {
@@ -29,4 +33,18 @@ async function signupFormHandler(event) {
   }
 }
 
-document.getElementById("signup-form").addEventListener("submit", signupFormHandler);
+const avatarSel = document.querySelectorAll(".buttons");
+
+avatarSel.forEach((btn) => {
+  btn.addEventListener("click", (event) => {
+    event.preventDefault();
+
+    if (event.target.src) {
+      avatar = String(event.target.src);
+    }
+  });
+});
+
+document
+  .getElementById("signup-form")
+  .addEventListener("submit", signupFormHandler);

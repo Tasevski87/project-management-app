@@ -1,0 +1,20 @@
+.avatar-img {
+  cursor: pointer;
+}
+
+.button.is-small {
+  font-size: 0rem;
+}
+
+.avatar-img:hover {
+  cursor: pointer;
+  color: rgba(255, 255, 255, 1);
+  box-shadow: 0 0px 15px rgba(82, 85, 246, 0.849)
+}
+
+.button.is-small:focus {
+  cursor: pointer;
+  color: rgb(57, 15, 247);
+  box-shadow: 0 0px 15px rgba(41, 45, 253, 0.849)
+}
+

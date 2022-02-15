@@ -6,21 +6,21 @@
           <article class="media">
             <figure class="media-left">
               <p class="image is-64x64">
-                <img src="/images/def-avatar.png" />
+                <img src={{this.user.avatar}} />
               </p>
             </figure>
             <div class="media-content">
               <div class="content">
                 <p>
                   <strong class="is-title">Title:
-                    {{project_name}}
+                    {{project.project_name}}
                   </strong><small> · {{created_at}}</small>
                   <br />
                   <strong>Description:</strong>
                   {{content}}
                   <br />
                   <strong>Author:</strong>
-                  {{user.username}}
+                  {{this.user.username}}
                   <br />
                   {{! <strong>Status: In Progress</strong>
                   <br /> }}
