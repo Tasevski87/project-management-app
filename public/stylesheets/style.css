@@ -23,3 +23,9 @@
   color: rgb(57, 15, 247);
   box-shadow: 0 0px 15px rgba(41, 45, 253, 0.849);
 }
+
+#edit-profile-btn, #edit-profile-btn:active {
+  width: 3rem;
+  outline: none;
+  border: none;
+}

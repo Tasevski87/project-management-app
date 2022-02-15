@@ -295,4 +295,37 @@ router.get("/create", withAuth, (req, res) => {
     });
 });
 
+// edit a user
+router.get("/edit/:id", withAuth, (req, res) => {
+  User.findByPk(req.params.id, {
+    order: [["id", "DESC"]],
+    attributes: [
+      "id",
+      "name",
+      "username",
+      "about",
+      "email",
+      "password",
+      "avatar",
+      "created_at",
+    ],
+  })
+  .then((dashboardData) => {
+    const dashboardDataArr = [dashboardData];
+    const dashboard = dashboardDataArr.map((user) =>
+      user.get({ plain: true })
+    )[0];
+
+    // render dashboard view, send project data and loggedIn
+    res.render("dash-edit", {
+      dashboard,
+      loggedIn: req.session.loggedIn,
+    });
+  })
+  .catch((err) => {
+    console.log(err);
+    res.status(500).json(err);
+  });
+});
+
 module.exports = router;

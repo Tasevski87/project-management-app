@@ -1,0 +1,184 @@
+<div class="columns is-multiline is-align-items-start is-justify-content-right">
+  {{> user-info dashboard }}
+  <div class="column">
+    <div class="card">
+      <div class="card-content">
+        <form id="signup-form" class="content">
+          <div class="field">
+            <label class="label">Name</label>
+            <div class="control">
+              <input
+                required
+                id="input-name"
+                class="input"
+                type="text"
+                placeholder="Enter your name"
+                value={{dashboard.name}}
+              />
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Username</label>
+            <div class="control has-icons-left has-icons-right">
+              <input
+                required
+                id="input-username"
+                class="input is-info"
+                type="text"
+                placeholder="Create a username"
+                value={{dashboard.username}}
+              />
+              <span class="icon is-small is-left">
+                <i class="fas fa-user"></i>
+              </span>
+              <span class="icon is-small is-right">
+                <i class="fas fa-check"></i>
+              </span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Email</label>
+            <div class="control has-icons-left has-icons-right">
+              <input
+                required
+                id="input-email"
+                class="input is-info"
+                type="email"
+                placeholder="Enter your email address"
+                value={{dashboard.email}}
+              />
+              <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+              </span>
+              <span class="icon is-small is-right">
+                <i class="fas fa-exclamation-triangle"></i>
+              </span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Password</label>
+            <div class="control has-icons-left has-icons-right">
+              <input
+                required
+                id="input-password"
+                class="input is-info"
+                type="password"
+                placeholder="Enter a password"
+              />
+              <span class="icon is-small is-left">
+                <i class="fas fa-lock"></i>
+              </span>
+              <span class="icon is-small is-right">
+                <i class="fas fa-exclamation-triangle"></i>
+              </span>
+            </div>
+          </div>
+
+          <div class="avatar field">
+            <label class="label">Avatar</label>
+            <div class="buttons">
+              <button
+                class="button is-small is-rounded image is-128x128 m-auto"
+              >
+                <img
+                  class="is-rounded avatar-img"
+                  src="https://bootdey.com/img/Content/avatar/avatar1.png"
+                />
+              </button>
+              <button
+                class="button is-small is-rounded image is-128x128 m-auto"
+              >
+                <img
+                  class="is-rounded avatar-img"
+                  src="https://bootdey.com/img/Content/avatar/avatar2.png"
+                />
+              </button>
+              <button
+                class="button is-small is-rounded image is-128x128 m-auto"
+              >
+                <img
+                  class="is-rounded avatar-img"
+                  src="https://bootdey.com/img/Content/avatar/avatar3.png"
+                />
+              </button>
+              <button
+                class="button is-small is-rounded image is-128x128 m-auto"
+              >
+                <img
+                  class="is-rounded avatar-img"
+                  src="https://bootdey.com/img/Content/avatar/avatar4.png"
+                />
+              </button>
+              <button
+                class="button is-small is-rounded image is-128x128 m-auto"
+              >
+                <img
+                  class="is-rounded avatar-img"
+                  src="https://bootdey.com/img/Content/avatar/avatar5.png"
+                />
+              </button>
+              <button
+                class="button is-small is-rounded image is-128x128 m-auto"
+              >
+                <img
+                  class="is-rounded avatar-img"
+                  src="https://bootdey.com/img/Content/avatar/avatar6.png"
+                />
+              </button>
+              <button
+                class="button is-small is-rounded image is-128x128 m-auto"
+              >
+                <img
+                  class="is-rounded avatar-img"
+                  src="https://bootdey.com/img/Content/avatar/avatar7.png"
+                />
+              </button>
+              <button
+                class="button is-small is-rounded image is-128x128 m-auto"
+              >
+                <img
+                  class="is-rounded avatar-img"
+                  src="https://bootdey.com/img/Content/avatar/avatar8.png"
+                />
+              </button>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">About</label>
+            <div class="control">
+              <textarea
+                id="input-about"
+                class="textarea"
+                placeholder="Tell us about yourself"
+              >{{dashboard.about}}</textarea>
+            </div>
+          </div>
+          <div class="field is-grouped">
+            <div class="control">
+              {{#if loggedIn}}
+              <button id="signup" class="button is-info">Submit</button>
+              {{else}}
+              <a href="/login">
+              <button id="signup" class="button is-info">Submit</button>
+              </a>
+              {{/if}}
+            </div>
+            <div class="control">
+              <a href="/dashboard" class="button is-info is-light ml-3">Cancel</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script
+  language="JavaScript"
+  type="text/javascript"
+  src="/javascript/jquery.js"
+></script>
+<script src="/javascript/edit-profile.js"></script>
