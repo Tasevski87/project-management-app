@@ -6,7 +6,7 @@
           <article class="media">
             <figure class="media-left">
               <p class="image is-64x64">
-                <img src="/images/def-avatar.png" />
+                <img src={{project.user.avatar}} />
               </p>
             </figure>
             <div class="media-content">
@@ -22,16 +22,10 @@
                   <strong>Author:</strong>
                   {{project.user.username}}
                   <br />
-                  {{! <strong>Status: In Progress</strong>
-                  <br /> }}
-                  {{#if loggedIn}}{{else}}
-                    <a class="view-project" href="/login"><strong
-                      >Comment</strong></a>  ·  
-                  {{/if}}
-                  {{#if loggedIn}}{{else}}
-                    <a class="view-project" href="/login"><strong
-                      >Add Task</strong></a>
-                  {{/if}}
+                  <a class="view-project" href="/project/{{project.id}}/comments"><strong
+                      >Comment</strong></a>  ·   
+                  <a class="view-project" href="/project/{{project.id}}/tasks"><strong
+                    >Add Task</strong></a>
                 </p>
               </div>
               {{> tasks project.tasks }}

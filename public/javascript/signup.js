@@ -1,4 +1,4 @@
-let avatar = "/images/def-avatar.png";
+let avatar = "/images/def-avatar.png"; // default avatar if none selected
 
 // Send user inputed data to server endpoint for sign up verification api/users/ POST
 async function signupFormHandler(event) {
@@ -9,7 +9,6 @@ async function signupFormHandler(event) {
   const password = document.getElementById("input-password").value.trim();
   const email = document.getElementById("input-email").value.trim();
   const about = document.getElementById("input-about").value.trim();
- 
 
   if (username && password) {
     const response = await fetch("/api/users", {
@@ -24,7 +23,7 @@ async function signupFormHandler(event) {
       }),
       headers: { "Content-Type": "application/json" },
     });
-    
+
     if (response.ok) {
       document.location.replace("/dashboard");
     } else {
@@ -33,6 +32,7 @@ async function signupFormHandler(event) {
   }
 }
 
+// avatar selection functionality
 const avatarSel = document.querySelectorAll(".buttons");
 
 avatarSel.forEach((btn) => {
@@ -43,6 +43,12 @@ avatarSel.forEach((btn) => {
       avatar = String(event.target.src);
     }
   });
+});
+
+// avatar highlighter
+$("button").on("click", function () {
+  $("button").removeClass("active");
+  $(this).addClass("active");
 });
 
 document

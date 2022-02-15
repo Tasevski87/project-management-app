@@ -2,18 +2,24 @@
   <article class="media">
     <figure class="media-left">
       <p class="image is-48x48">
-        <img src="/images/def-avatar.png" />
+        <img src={{user.avatar}} />
       </p>
     </figure>
     <div class="media-content">
       <div class="content">
         <p>
-          <strong>{{user.username}}</strong><small> · {{created_at}} </small>
+          <strong>Project Name:</strong>
+          {{project.project_name}}
+          -
+          {{user.username}}
           <br />
           {{comment_text}}
           <br />
+          <small>Posted · {{created_at}} </small>
         </p>
       </div>
     </div>
   </article>
 {{/each}}
+
+{{log this}}

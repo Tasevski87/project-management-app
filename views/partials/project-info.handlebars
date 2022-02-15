@@ -7,24 +7,22 @@
             <article class="media">
               <figure class="media-left">
                 <p class="image is-64x64">
-                  <img src={{this.user.avatar}} />
+                  <img src={{user.avatar}} />
                 </p>
               </figure>
               <div class="media-content">
                 <div class="content">
                   <p>
-                    <strong class="is-title">Title:
-                      {{this.project_name}}
-                    </strong><small> · {{this.created_at}}</small>
+                    <strong class="is-title">Title:</strong>
+                    {{project_name}}
+                    <small> · {{created_at}}</small>
                     <br />
                     <strong>Description:</strong>
                     {{content}}
                     <br />
                     <strong>Author:</strong>
-                    {{this.user.username}}
+                    {{user.username}}
                     <br />
-                    {{! <strong>Status: In Progress</strong>
-                  <br /> }}
                     <a
                       class="view-comment"
                       href="/project/{{id}}/comments"
@@ -34,7 +32,6 @@
                     <br />
                   </p>
                 </div>
-                {{! comments }}
               </div>
             </article>
           </div>

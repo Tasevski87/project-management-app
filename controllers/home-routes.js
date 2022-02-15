@@ -4,6 +4,7 @@ const { User, Project, Comment, Task } = require("../models");
 // get projects for homepage
 router.get("/", (req, res) => {
   Project.findAll({
+    order: [["id", "DESC"]],
     attributes: ["id", "project_name", "content", "created_at"],
     include: [
       {
@@ -96,12 +97,12 @@ router.get("/project/:id/tasks", (req, res) => {
         attributes: ["id", "task_name", "task_description", "created_at"],
         include: {
           model: User,
-          attributes: ["username"],
+          attributes: { exclude: ["password"] },
         },
       },
       {
         model: User,
-        attributes: ["username"],
+        attributes: { exclude: ["password"] },
       },
     ],
   })

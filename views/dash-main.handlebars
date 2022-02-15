@@ -1,8 +1,12 @@
-<div class="columns is-multiline is-align-items-end is-justify-content-right">
+<div class="columns is-multiline is-align-items-start is-justify-content-right">
   {{> user-info dashboard }}
   <div class="column">
+    {{#if dashboard.projects.length}}
 
-    {{> project-info dashboard.projects }}  
-
+    {{> project-info dashboard.projects }} 
+    
+    {{/if}}
   </div>
 </div>
+
+{{log dashboard}}

@@ -2,47 +2,32 @@ const router = require("express").Router();
 const withAuth = require("../utils/auth");
 const { Project, User, Comment, Task } = require("../models");
 
-// // get all users projects for dashboard
-// router.get("/", withAuth, (req, res) => {
-//   Project.findAll({
-//     where: {
-//       user_id: req.session.user_id,
-//     },
-//     attributes: ["id", "project_name", "content", "created_at"],
-//     include: [
-//       {
-//         model: User,
-//         attributes: { exclude: ["password"] },
-//       },
-//     ],
-//   })
-//     .then((dashboardData) => {
-//       const dashboard = dashboardData.map((project) =>
-//         project.get({ plain: true })
-//       );
-//       console.log(dashboard);
-//       // render dashboard view, send project data and loggedIn
-//       res.render("dash-main", {
-//         dashboard,
-//         loggedIn: req.session.loggedIn,
-//       });
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//       res.status(500).json(err);
-//     });
-// });
-
-// get user data for dashboard
-router.get("/", (req, res) => {
+// get user data for dashboard-projects
+router.get("/", withAuth, (req, res) => {
   User.findOne({
-    attributes: { exclude: ["password"] },
+    order: [["id", "DESC"]],
+    attributes: [
+      "id",
+      "name",
+      "username",
+      "about",
+      "email",
+      "avatar",
+      "created_at",
+    ],
     where: {
       id: req.session.user_id,
     },
     include: [
       {
         model: Comment,
+        attributes: [
+          "id",
+          "comment_text",
+          "user_id",
+          "project_id",
+          "created_at",
+        ],
         include: [
           {
             model: Project,
@@ -51,7 +36,10 @@ router.get("/", (req, res) => {
             model: User,
           },
         ],
+      },
+      {
         model: Project,
+        attributes: ["id", "project_name", "user_id", "created_at"],
         include: [
           {
             model: Comment,
@@ -59,22 +47,40 @@ router.get("/", (req, res) => {
           {
             model: User,
           },
-        ]
+        ],
+      },
+      {
+        model: Task,
+        attributes: [
+          "id",
+          "task_name",
+          "task_description",
+          "user_id",
+          "project_id",
+          "created_at",
+        ],
+        include: [
+          {
+            model: Project,
+          },
+          {
+            model: User,
+          },
+        ],
       },
     ],
   })
     .then((dashboardData) => {
-      // console.log(dashboardData)
-      const dashboardDataArr = [dashboardData]
-      // console.log(dashboardDataArr)
-      const dashboard = dashboardDataArr.map((user) => user.get({ plain: true }))[0];
-      console.log(dashboard)
+      const dashboardDataArr = [dashboardData];
+      const dashboard = dashboardDataArr.map((user) =>
+        user.get({ plain: true })
+      )[0];
+
       // render dashboard view, send project data and loggedIn
       res.render("dash-main", {
         dashboard,
         loggedIn: req.session.loggedIn,
       });
-
     })
     .catch((err) => {
       console.log(err);
@@ -82,59 +88,81 @@ router.get("/", (req, res) => {
     });
 });
 
-// GET /api/users/1
-router.get("/", (req, res) => {
+// get user data for dashboard-comments
+router.get("/comments", withAuth, (req, res) => {
   User.findOne({
-    attributes: { exclude: ["password"] },
+    order: [["id", "DESC"]],
+    attributes: [
+      "id",
+      "name",
+      "username",
+      "about",
+      "email",
+      "avatar",
+      "created_at",
+    ],
     where: {
-      id: req.session.id,
+      id: req.session.user_id,
     },
     include: [
       {
         model: Comment,
-        include: {
-          model: Project,
-          attributes: ["project_name"],
-        },
+        attributes: [
+          "id",
+          "comment_text",
+          "user_id",
+          "project_id",
+          "created_at",
+        ],
+        include: [
+          {
+            model: Project,
+          },
+          {
+            model: User,
+          },
+        ],
       },
       {
         model: Project,
+        attributes: ["id", "project_name", "user_id", "created_at"],
+        include: [
+          {
+            model: Comment,
+          },
+          {
+            model: User,
+          },
+        ],
       },
-    ],
-  })
-    .then((dbUserData) => {
-      if (!dbUserData) {
-        res.status(404).json({ message: "No user found with this id" });
-        return;
-      }
-      res.json(dbUserData);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json(err);
-    });
-});
-
-// get all comments for dashboard
-router.get("/comments", withAuth, (req, res) => {
-  Comment.findAll({
-    where: {
-      user_id: req.session.user_id,
-    },
-    attributes: ["id", "comment_text", "project_id", "user_id", "created_at"],
-    include: [
       {
-        model: User,
-        attributes: { exclude: ["password"] },
+        model: Task,
+        attributes: [
+          "id",
+          "task_name",
+          "task_description",
+          "user_id",
+          "project_id",
+          "created_at",
+        ],
+        include: [
+          {
+            model: Project,
+          },
+          {
+            model: User,
+          },
+        ],
       },
     ],
   })
     .then((dashboardData) => {
-      const dashboard = dashboardData.map((comment) =>
-        comment.get({ plain: true })
-      );
-      // render dashboard view, send comment data and loggedIn
-      console.log(dashboard);
+      const dashboardDataArr = [dashboardData];
+      const dashboard = dashboardDataArr.map((user) =>
+        user.get({ plain: true })
+      )[0];
+
+      // render dashboard view, send project data and loggedIn
       res.render("dash-comments", {
         dashboard,
         loggedIn: req.session.loggedIn,
@@ -146,31 +174,81 @@ router.get("/comments", withAuth, (req, res) => {
     });
 });
 
-// get all tasks for dashboard
+// get user data for dashboard-comments
 router.get("/tasks", withAuth, (req, res) => {
-  Task.findAll({
-    where: {
-      user_id: req.session.user_id,
-    },
+  User.findOne({
+    order: [["id", "DESC"]],
     attributes: [
       "id",
-      "task_name",
-      "task_description",
-      "user_id",
+      "name",
+      "username",
+      "about",
+      "email",
+      "avatar",
       "created_at",
     ],
+    where: {
+      id: req.session.user_id,
+    },
     include: [
       {
-        model: User,
-        attributes: { exclude: ["password"] },
+        model: Comment,
+        attributes: [
+          "id",
+          "comment_text",
+          "user_id",
+          "project_id",
+          "created_at",
+        ],
+        include: [
+          {
+            model: Project,
+          },
+          {
+            model: User,
+          },
+        ],
+      },
+      {
+        model: Project,
+        attributes: ["id", "project_name", "user_id", "created_at"],
+        include: [
+          {
+            model: Comment,
+          },
+          {
+            model: User,
+          },
+        ],
+      },
+      {
+        model: Task,
+        attributes: [
+          "id",
+          "task_name",
+          "task_description",
+          "user_id",
+          "project_id",
+          "created_at",
+        ],
+        include: [
+          {
+            model: Project,
+          },
+          {
+            model: User,
+          },
+        ],
       },
     ],
   })
     .then((dashboardData) => {
-      console.log(dashboardData);
-      const dashboard = dashboardData.map((task) => task.get({ plain: true }));
-      // render dashboard view, send task data and loggedIn
-      console.log("tasks:", dashboard);
+      const dashboardDataArr = [dashboardData];
+      const dashboard = dashboardDataArr.map((user) =>
+        user.get({ plain: true })
+      )[0];
+
+      // render dashboard view, send project data and loggedIn
       res.render("dash-tasks", {
         dashboard,
         loggedIn: req.session.loggedIn,
@@ -184,7 +262,37 @@ router.get("/tasks", withAuth, (req, res) => {
 
 // create project
 router.get("/create", withAuth, (req, res) => {
-  res.render("dash-create");
+  User.findOne({
+    order: [["id", "DESC"]],
+    attributes: [
+      "id",
+      "name",
+      "username",
+      "about",
+      "email",
+      "avatar",
+      "created_at",
+    ],
+    where: {
+      id: req.session.user_id,
+    },
+  })
+    .then((dashboardData) => {
+      const dashboardDataArr = [dashboardData];
+      const dashboard = dashboardDataArr.map((user) =>
+        user.get({ plain: true })
+      )[0];
+
+      // render dashboard view, send project data and loggedIn
+      res.render("dash-create", {
+        dashboard,
+        loggedIn: req.session.loggedIn,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
 module.exports = router;

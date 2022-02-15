@@ -6,7 +6,7 @@
           <article class="media">
             <figure class="media-left">
               <p class="image is-64x64">
-                <img src="/images/def-avatar.png" />
+                <img src={{project.user.avatar}} />
               </p>
             </figure>
             <div class="media-content">
@@ -24,14 +24,24 @@
                   <br />
                   {{! <strong>Status: In Progress</strong>
                   <br /> }}
-                  {{#if loggedIn}}{{else}}
-                    <a class="view-project" href="/login"><strong
+                    {{#if loggedIn}}
+                    <a class="view-project" href="/project/{{project.id}}/comments"><strong
                       >Comment</strong></a>  ·  
-                  {{/if}}
-                  {{#if loggedIn}}{{else}}
-                    <a class="view-project" href="/login"><strong
+                  
+                  
+                    <a class="view-project" href="/project/{{project.id}}/tasks"><strong
                       >Add Task</strong></a>
-                  {{/if}}
+
+                      {{else}}
+                      <a
+                        class="view-comment"
+                        href="/login"
+                      ><strong>Comment · </strong></a>
+                      <a class="view-task" href="/login"><strong
+                        >Add Task</strong></a>
+                      <br />
+                    {{/if}}
+                
                 </p>
               </div>
               {{> comments project.comments }}
@@ -45,3 +55,4 @@
     </div>
   </div>
 </div>
+{{log project}}
