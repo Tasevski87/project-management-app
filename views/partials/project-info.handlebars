@@ -1,41 +1,45 @@
-<div class="container">
-  <div class="columns is-centered">
-    <div class="column">
-      <div class="card">
-        <div class="card-content">
-          <article class="media">
-            <figure class="media-left">
-              <p class="image is-64x64">
-                <img src={{this.user.avatar}} />
-              </p>
-            </figure>
-            <div class="media-content">
-              <div class="content">
-                <p>
-                  <strong class="is-title">Title:
-                    {{project.project_name}}
-                  </strong><small> · {{created_at}}</small>
-                  <br />
-                  <strong>Description:</strong>
-                  {{content}}
-                  <br />
-                  <strong>Author:</strong>
-                  {{this.user.username}}
-                  <br />
-                  {{! <strong>Status: In Progress</strong>
-                  <br /> }}
-                  <a class="view-comment" href="/project/{{id}}/comments"><strong>View
-                      Comments · </strong></a>
-                  <a class="view-task" href="/project/{{id}}/tasks"><strong>View
-                      Tasks</strong></a>
-                  <br />
+{{#each this}}
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column">
+        <div class="card">
+          <div class="card-content">
+            <article class="media">
+              <figure class="media-left">
+                <p class="image is-64x64">
+                  <img src={{this.user.avatar}} />
                 </p>
+              </figure>
+              <div class="media-content">
+                <div class="content">
+                  <p>
+                    <strong class="is-title">Title:
+                      {{this.project_name}}
+                    </strong><small> · {{this.created_at}}</small>
+                    <br />
+                    <strong>Description:</strong>
+                    {{content}}
+                    <br />
+                    <strong>Author:</strong>
+                    {{this.user.username}}
+                    <br />
+                    {{! <strong>Status: In Progress</strong>
+                  <br /> }}
+                    <a
+                      class="view-comment"
+                      href="/project/{{id}}/comments"
+                    ><strong>View Comments · </strong></a>
+                    <a class="view-task" href="/project/{{id}}/tasks"><strong
+                      >View Tasks</strong></a>
+                    <br />
+                  </p>
+                </div>
+                {{! comments }}
               </div>
-              {{! comments }}
-            </div>
-          </article>
+            </article>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+{{/each}}

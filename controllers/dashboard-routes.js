@@ -2,30 +2,79 @@ const router = require("express").Router();
 const withAuth = require("../utils/auth");
 const { Project, User, Comment, Task } = require("../models");
 
-// get all users projects for dashboard
-router.get("/", withAuth, (req, res) => {
-  Project.findAll({
+// // get all users projects for dashboard
+// router.get("/", withAuth, (req, res) => {
+//   Project.findAll({
+//     where: {
+//       user_id: req.session.user_id,
+//     },
+//     attributes: ["id", "project_name", "content", "created_at"],
+//     include: [
+//       {
+//         model: User,
+//         attributes: { exclude: ["password"] },
+//       },
+//     ],
+//   })
+//     .then((dashboardData) => {
+//       const dashboard = dashboardData.map((project) =>
+//         project.get({ plain: true })
+//       );
+//       console.log(dashboard);
+//       // render dashboard view, send project data and loggedIn
+//       res.render("dash-main", {
+//         dashboard,
+//         loggedIn: req.session.loggedIn,
+//       });
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//       res.status(500).json(err);
+//     });
+// });
+
+// get user data for dashboard
+router.get("/", (req, res) => {
+  User.findOne({
+    attributes: { exclude: ["password"] },
     where: {
-      user_id: req.session.user_id,
+      id: req.session.user_id,
     },
-    attributes: ["id", "project_name", "content", "created_at"],
     include: [
       {
-        model: User,
-        attributes: { exclude: ["password"] },
+        model: Comment,
+        include: [
+          {
+            model: Project,
+          },
+          {
+            model: User,
+          },
+        ],
+        model: Project,
+        include: [
+          {
+            model: Comment,
+          },
+          {
+            model: User,
+          },
+        ]
       },
     ],
   })
     .then((dashboardData) => {
-      const dashboard = dashboardData.map((project) =>
-        project.get({ plain: true })
-      );
-      console.log(dashboard);
+      // console.log(dashboardData)
+      const dashboardDataArr = [dashboardData]
+      // console.log(dashboardDataArr)
+      const dashboard = dashboardDataArr.map((user) => user.get({ plain: true }))[0];
+      console.log(dashboard)
       // render dashboard view, send project data and loggedIn
       res.render("dash-main", {
         dashboard,
         loggedIn: req.session.loggedIn,
       });
+
     })
     .catch((err) => {
       console.log(err);
