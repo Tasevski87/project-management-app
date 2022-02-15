@@ -3,6 +3,7 @@ const express = require("express");
 const session = require("express-session");
 const exphbs = require("express-handlebars");
 const helpers = require("./utils/helpers");
+const chalk = require('chalk')
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -35,5 +36,5 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(require("./controllers/"));
 
 sequelize.sync({ force: false }).then(() => {
-  app.listen(PORT, () => console.log("Now listening"));
+  app.listen(PORT, () => console.log(chalk.blue.bold("Now listening on Port 3001")));
 });
