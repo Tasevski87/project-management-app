@@ -4,7 +4,6 @@ package-lock.json
 .vscode
 .DS_Store
 .env
-chalk.js
 
 # Logs
 logs

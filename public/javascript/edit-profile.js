@@ -14,7 +14,7 @@ async function signupFormHandler(event) {
     window.location.toString().split("/").length - 1
   ];
 
-  if (username && password) {
+  if (name && username && password && email && about) {
     const response = await fetch(`/api/users/${id}`, {
       method: "PUT",
       body: JSON.stringify({

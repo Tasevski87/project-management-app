@@ -8,8 +8,6 @@ async function commentFormHandler(event) {
     window.location.toString().split("/").length - 2
   ];
 
-  console.log(project_id)
-
   if (comment_text) {
     const response = await fetch("/api/comment", {
       method: "POST",

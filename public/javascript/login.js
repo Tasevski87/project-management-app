@@ -18,8 +18,10 @@ async function login(event) {
     if (response.ok) {
       let prevWindow = document.referrer;
       if (
+        prevWindow === "http://localhost:3001/" ||
         prevWindow === "http://localhost:3001/login" ||
-        prevWindow === "http://localhost:3001/"
+        prevWindow === "https://hidden-sea-60654.herokuapp.com/" ||
+        prevWindow === "https://hidden-sea-60654.herokuapp.com/login"
       ) {
         document.location.replace("/dashboard");
       } else {
@@ -31,5 +33,4 @@ async function login(event) {
   }
 }
 
-console.log(document.referrer);
 document.getElementById("login").addEventListener("click", login);
