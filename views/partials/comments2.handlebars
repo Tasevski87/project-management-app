@@ -8,10 +8,15 @@
     <div class="media-content">
       <div class="content">
         <p>
+          <strong>Project Name:</strong>
+          {{project.project_name}}
+          <br />
+          <br />
           {{comment_text}}
           <br />
-          <br />
-          {{user.username}} · <small>{{format_posted_date created_at}}</small>
+          <div class="block">
+            <small>{{format_posted_date created_at}}</small>
+          </div>
         </p>
       </div>
     </div>

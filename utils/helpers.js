@@ -42,3 +42,4 @@ module.exports = {
     return `Posted ${timePosted} ${postString} ago`;
   },
 };
+

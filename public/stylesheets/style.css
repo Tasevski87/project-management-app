@@ -1,3 +1,15 @@
+.hero {
+  background-image: url("../images/banner.png");
+  background-position: bottom center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.hero.is-small .hero-body {
+  max-height: 200px;
+  padding: 0;
+}
+
 .avatar-img {
   cursor: pointer;
 }
@@ -24,7 +36,8 @@
   box-shadow: 0 0px 15px rgba(41, 45, 253, 0.849);
 }
 
-#edit-profile-btn, #edit-profile-btn:active {
+#edit-profile-btn,
+#edit-profile-btn:active {
   width: 3rem;
   outline: none;
   border: none;

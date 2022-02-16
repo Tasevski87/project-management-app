@@ -1,0 +1,26 @@
+{{#each this}}
+  <article class="media">
+    <figure class="media-left">
+      <p class="image is-48x48">
+        <img src={{user.avatar}} />
+      </p>
+    </figure>
+    <div class="media-content">
+      <div class="content">
+        <div class="cardhearder"><strong>Project Name:</strong>
+          {{project.project_name}}
+          <br />
+          <strong>Task Name: </strong>
+          {{task_name}}
+          <p>
+            <strong>Task Description: </strong>{{task_description}}
+            <br />
+            <br />
+            <small> {{format_posted_date created_at}}</small>
+            <br />
+          </p>
+        </div>
+      </div>
+    </div>
+  </article>
+{{/each}}
