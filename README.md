@@ -32,7 +32,13 @@ https://drive.google.com/file/d/1SpHDRBxmoK_2NGSCBjPjgdy4xScwDbje/view
 
 
 ## Credits
-This is a group project and the collaborators are: https://github.com/scollins117 ---  https://github.com/Tasevski87  ---     https://github.com/sirTedDanson/
+This is a group project and the collaborators are:
+
+ https://github.com/scollins117
+ 
+  https://github.com/Tasevski87  
+  
+   https://github.com/sirTedDanson/
 
 ## License
 MIT
@@ -61,5 +67,5 @@ https://github.com/Tasevski87/project-management-app
 
 
 ## Heroku link:
-https://whispering-everglades-14984.herokuapp.com/
+https://hidden-sea-60654.herokuapp.com/
 
