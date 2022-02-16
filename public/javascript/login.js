@@ -16,11 +16,20 @@ async function login(event) {
     });
 
     if (response.ok) {
-      window.location=document.referrer;
+      let prevWindow = document.referrer;
+      if (
+        prevWindow === "http://localhost:3001/login" ||
+        prevWindow === "http://localhost:3001/"
+      ) {
+        document.location.replace("/dashboard");
+      } else {
+        window.location = prevWindow;
+      }
     } else {
       alert(response.statusText);
     }
   }
 }
 
+console.log(document.referrer);
 document.getElementById("login").addEventListener("click", login);
