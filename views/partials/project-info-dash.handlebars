@@ -1,0 +1,45 @@
+{{#each this}}
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column">
+        <div class="card">
+          <div class="card-content">
+            <article class="media">
+              <figure class="media-left">
+                <p class="image is-64x64">
+                  <img src={{user.avatar}} />
+                </p>
+              </figure>
+              <div class="media-content">
+                <div class="content">
+                  <p>
+                    <strong class="is-title">Title:</strong>
+                    {{project_name}}
+                    <small> · {{format_posted_date created_at}}</small>
+                    <br />
+                    <strong>Description:</strong>
+                    {{content}}
+                    <br />
+                    <a class="view-project" href="/project/{{id}}"><strong>View
+                        Project ·
+                      </strong></a>
+                    <a
+                      class="view-comment"
+                      href="/project/{{id}}/comments"
+                    ><strong>Comments · </strong></a>
+                    <a class="view-task" href="/project/{{id}}/tasks"><strong
+                      >Tasks · </strong></a>
+                    <a class="edit-project has-text-danger" href="/dashboard/project/edit/{{id}}"><strong
+                      >Edit Project
+                      </strong></a>
+                    <br />
+                  </p>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{{/each}}

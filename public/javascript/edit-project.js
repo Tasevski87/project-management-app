@@ -4,9 +4,13 @@ async function createFormHandler(event) {
   const project_name = document.getElementById("proj-name").value.trim();
   const content = document.getElementById("proj-description").value.trim();
 
+  const id = window.location.toString().split("/")[
+    window.location.toString().split("/").length - 1
+  ];
+
   if (project_name && content) {
-    const response = await fetch("/api/project/", {
-      method: "POST",
+    const response = await fetch(`/api/project/${id}`, {
+      method: "PUT",
       body: JSON.stringify({
         project_name,
         content,

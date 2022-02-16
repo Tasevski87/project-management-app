@@ -39,7 +39,7 @@ router.get("/", withAuth, (req, res) => {
       },
       {
         model: Project,
-        attributes: ["id", "project_name", "user_id", "created_at"],
+        attributes: ["id", "project_name", "content", "user_id", "created_at"],
         include: [
           {
             model: Comment,
@@ -125,7 +125,7 @@ router.get("/comments", withAuth, (req, res) => {
       },
       {
         model: Project,
-        attributes: ["id", "project_name", "user_id", "created_at"],
+        attributes: ["id", "project_name", "content", "user_id", "created_at"],
         include: [
           {
             model: Comment,
@@ -211,7 +211,7 @@ router.get("/tasks", withAuth, (req, res) => {
       },
       {
         model: Project,
-        attributes: ["id", "project_name", "user_id", "created_at"],
+        attributes: ["id", "project_name", "content", "user_id", "created_at"],
         include: [
           {
             model: Comment,
@@ -276,6 +276,20 @@ router.get("/create", withAuth, (req, res) => {
     where: {
       id: req.session.user_id,
     },
+    include: [
+      {
+        model: Project,
+        attributes: ["id", "project_name", "content", "user_id", "created_at"],
+        include: [
+          {
+            model: Comment,
+          },
+          {
+            model: User,
+          },
+        ],
+      },
+    ],
   })
     .then((dashboardData) => {
       const dashboardDataArr = [dashboardData];
@@ -296,9 +310,8 @@ router.get("/create", withAuth, (req, res) => {
 });
 
 // edit a user
-router.get("/edit/:id", withAuth, (req, res) => {
+router.get("/user/edit/:id", withAuth, (req, res) => {
   User.findByPk(req.params.id, {
-    order: [["id", "DESC"]],
     attributes: [
       "id",
       "name",
@@ -310,22 +323,59 @@ router.get("/edit/:id", withAuth, (req, res) => {
       "created_at",
     ],
   })
-  .then((dashboardData) => {
-    const dashboardDataArr = [dashboardData];
-    const dashboard = dashboardDataArr.map((user) =>
-      user.get({ plain: true })
-    )[0];
+    .then((dashboardData) => {
+      const dashboardDataArr = [dashboardData];
+      const dashboard = dashboardDataArr.map((user) =>
+        user.get({ plain: true })
+      )[0];
 
-    // render dashboard view, send project data and loggedIn
-    res.render("dash-edit", {
-      dashboard,
-      loggedIn: req.session.loggedIn,
+      // render dashboard view, send project data and loggedIn
+      res.render("dash-edit", {
+        dashboard,
+        loggedIn: req.session.loggedIn,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
     });
+});
+
+// edit a project
+router.get("/project/edit/:id", withAuth, (req, res) => {
+  Project.findByPk(req.params.id, {
+    include: [
+      {
+        model: User,
+        attributes: [
+          "id",
+          "name",
+          "username",
+          "about",
+          "email",
+          "password",
+          "avatar",
+          "created_at",
+        ],
+      },
+    ],
   })
-  .catch((err) => {
-    console.log(err);
-    res.status(500).json(err);
-  });
+    .then((dashboardData) => {
+      const dashboardDataArr = [dashboardData];
+      const dashboard = dashboardDataArr.map((user) =>
+        user.get({ plain: true })
+      )[0];
+
+      // render dashboard view, send project data and loggedIn
+      res.render("dash-edit-proj.handlebars", {
+        dashboard,
+        loggedIn: req.session.loggedIn,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
 module.exports = router;
