@@ -1,0 +1,75 @@
+<div class="container">
+  <div class="columns is-centered">
+    <div class="column">
+      <div class="card">
+        <div class="card-content">
+          <article class="media">
+            <figure class="media-left">
+              <p class="image is-64x64">
+                <img src={{project.user.avatar}} />
+              </p>
+            </figure>
+            <div class="media-content">
+              <div class="content">
+                <p>
+                  <strong class="is-title">Title:
+                    {{project.project_name}}  </strong><small>  ·
+                    {{project.created_at}}</small>
+                  <br />
+                  <strong>Description:</strong>
+                  {{project.content}}
+                  <br />
+                  <strong>Author:</strong>
+                  {{project.user.username}}
+                  <br />
+                  {{! <strong>Status: In Progress</strong>
+                  <br /> }}
+                    {{#if loggedIn}}
+                    <a class="view-project" href="/project/{{project.id}}/comments"><strong
+                      >Comment</strong></a>  ·  
+                  
+                  
+                    <a class="view-project" href="/project/{{project.id}}/tasks"><strong
+                      >Add Task</strong></a>
+
+                      {{else}}
+                      <a
+                        class="view-comment"
+                        href="/login"
+                      ><strong>Comment · </strong></a>
+                      <a class="view-task" href="/login"><strong
+                        >Add Task</strong></a>
+                      <br />
+                    {{/if}}
+                
+                </p>
+              </div>
+              {{#if project.tasks.length}}
+              <div>
+                <p class="box subtitle">
+                  Tasks
+                </p>
+                </div>
+                <div class="card-content">
+                  {{> tasks project.tasks }}
+                </div>
+              {{/if}}
+              {{#if project.comments.length}}
+              <div>
+                <p class="box subtitle">
+                  Comments
+                </p>
+                </div>
+                <div class="card-content">
+                  {{> comments project.comments }}
+                </div>
+              {{/if}}
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{log this}}

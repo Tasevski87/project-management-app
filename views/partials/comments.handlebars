@@ -8,14 +8,16 @@
     <div class="media-content">
       <div class="content">
         <p>
-          <strong>Project Name:</strong>
-          {{project.project_name}}
-          -
-          {{user.username}}
+          <strong>
+            {{project.project_name}}</strong>
           <br />
           {{comment_text}}
           <br />
-          <small>Posted · {{created_at}} </small>
+          -
+          {{user.username}}
+          <div class="block">
+            <small>Posted · {{created_at}} </small>
+          </div>
         </p>
       </div>
     </div>

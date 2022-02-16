@@ -22,10 +22,22 @@
                   <strong>Author:</strong>
                   {{project.user.username}}
                   <br />
-                  <a class="view-project" href="/project/{{project.id}}/comments"><strong
-                      >Comment</strong></a>  ·   
-                  <a class="view-project" href="/project/{{project.id}}/tasks"><strong
-                    >Add Task</strong></a>
+                  {{#if loggedIn}}
+                    <a
+                      class="view-project"
+                      href="/project/{{project.id}}/comments"
+                    ><strong>Comment</strong></a>
+                    ·
+                    <a
+                      class="view-project"
+                      href="/project/{{project.id}}/tasks"
+                    ><strong>Add Task</strong></a>
+                  {{else}}
+                    <a class="view-comment" href="/login"><strong>Comment ·
+                      </strong></a>
+                    <a class="view-task" href="/login"><strong>Add Task</strong></a>
+                    <br />
+                  {{/if}}
                 </p>
               </div>
               {{> tasks project.tasks }}

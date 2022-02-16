@@ -1,6 +1,61 @@
 const router = require("express").Router();
 const { User, Project, Comment, Task } = require("../models");
 
+// get a single project for view
+router.get("/project/:id", (req, res) => {
+  Project.findOne({
+    where: {
+      id: req.params.id,
+    },
+    attributes: ["id", "project_name", "content", "created_at"],
+    include: [
+      {
+        model: Task,
+        attributes: ["id", "task_name", "task_description", "created_at"],
+        include: {
+          model: User,
+          attributes: { exclude: ["password"] },
+        },
+      },
+      {
+        model: Comment,
+        attributes: [
+          "id",
+          "comment_text",
+          "project_id",
+          "user_id",
+          "created_at",
+        ],
+        include: {
+          model: User,
+          attributes: { exclude: ["password"] },
+        },
+      },
+      {
+        model: User,
+        attributes: { exclude: ["password"] },
+      },
+    ],
+  })
+    .then((dbProjectData) => {
+      if (!dbProjectData) {
+        res.status(404).json({ message: "No project found with this id" });
+        return;
+      }
+
+      const project = dbProjectData.get({ plain: true });
+      // render single project page, send project data and loggedIn
+      res.render("single-project", {
+        project,
+        loggedIn: req.session.loggedIn,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
+
 // get projects for homepage
 router.get("/", (req, res) => {
   Project.findAll({
