@@ -37,8 +37,11 @@
 }
 
 #edit-profile-btn,
+#edit-profile-btn:focus,
 #edit-profile-btn:active {
   width: 3rem;
   outline: none;
   border: none;
+  border-style: none;
+  border-radius: 0;
 }

@@ -16,7 +16,7 @@ async function login(event) {
     });
 
     if (response.ok) {
-      document.location.replace("/dashboard");
+      window.location=document.referrer;
     } else {
       alert(response.statusText);
     }

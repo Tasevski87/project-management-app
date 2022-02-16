@@ -49,7 +49,7 @@
                 </p>
                 </div>
                 <div class="card-content">
-                  {{> tasks project.tasks }}
+                  {{> tasks-main project.tasks }}
                 </div>
               {{/if}}
               {{#if project.comments.length}}
@@ -59,7 +59,7 @@
                 </p>
                 </div>
                 <div class="card-content">
-                  {{> comments project.comments }}
+                  {{> comments-main project.comments }}
                 </div>
               {{/if}}
             </div>
